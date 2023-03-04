@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+<style>
+    .card {
+        background: linear-gradient(181.2deg, rgb(181, 239, 249) 10.5%, rgb(254, 254, 254) 86.8%);
+        ;
+        margin: 30px 40px;
+        box-shadow: 8px 5px 5px rgb(221, 220, 220);
+    }
+
+    .searchBox {
+        position: relative;
+        top: 25px;
+        left: 230px;
+    }
+
+    .todayStatus {
+        text-align: center;
+        font-size: 20px;
+        font-family: Segoe UI', Tahoma, Geneva, Verdana, sans-serifs;
+
+    }
+
+    .city {
+        font-size: 30px;
+        font-family: Tahoma;
+    }
+
+    .day {
+        color: rgb(95, 94, 94);
+    }
+
+    .firstweather {
+        font-size: 35px;
+        color: rgb(49, 102, 248);
+        font-family: Tahoma;
+    }
+
+    .mainemoji {
+        font-size: 50px;
+    }
+
+    .degree {
+        font-size: 30px;
+        color: black;
+    }
+
+    .details {
+        font-size: 16px;
+        color: rgb(95, 94, 94);
+    }
+
+    .futureforcast {
+        color: rgb(124, 184, 240);
+        font-size: 24px;
+    }
+
+    .otherdays {
+        font-size: 18px;
+        color: rgb(116, 115, 115);
+    }
+
+    .emoji1,
+    .emoji2,
+    .emoji3,
+    .emoji4,
+    .emoji5 {
+        font-size: 30px;
+    }
+
+    .btn-success {
+        margin: 0px 10px;
+    }
+    .codeby {
+    margin: 30px 40px;
+    line-height: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+</style>
+
+<body>
+    <div class="container">
+        <div class="card body">
+            <span class="searchBox">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Enter the city" id="searchinput">
+                    </div>
+                    <div class="col">
+                        <button type="search" class="btn btn-primary" id="searchengine">Search</button>
+                        <button type="button" class="btn btn-success" id="currentsearchengine">Current</button>
+                    </div>
+                </div>
+            </span>
+            <br>
+            <br>
+            <br>
+            <span class="todayStatus">
+                <div class="row">
+                    <div class="col">
+                        <span class="city" id="cityy"> </span> <br> <span class="day">Wednesday <span id="clock">
+                            </span></span>
+                    </div>
+            </span>
+            <div class="col">
+                <span class="firstweather" id="firstweather"> </span>
+            </div>
+            <div class="col">
+                <span class="degree"> <span id="degreeNumber"> </span> <span id="celsius">°C</span>
+                    <div class="details">Humidity: <span class="humidity" id="humidity"> </span>% <br> Wind: <span
+                            class="wind" id="wind"> </span> km/s </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <em><span class="futureforcast">Future Forcast</span> </em>
+        <hr>
+        <span class="otherdays">
+            <div class="row">
+                <div class="col">
+                    <span class="emoji1">⛅️</span> <br> Thursday
+                </div>
+                <div class="col">
+                    <span class="emoji2">⛅️</span> <br> Friday
+                </div>
+                <div class="col">
+                    <span class="emoji3">🌨</span> <br> Saturday
+                </div>
+                <div class="col">
+                    <span class="emoji4">⛅️</span> <br> Sunday
+                </div>
+                <div class="col">
+                    <span class="emoji5">⛅️</span> <br> Monday
+                </div>
+        </span>
+    </div>
+    </div>
+    <div class="codeby"> <a href="https://github.com/Raha-P/Weather-app">open-source code</a> by Raha Pedram fard</div>
+
+    <script>
+
+
+        function changeCityTemp(response) {
+            console.log(response);
+            document.querySelector("#cityy").innerHTML = response.data.name;
+            document.querySelector("#degreeNumber").innerHTML = Math.round(response.data.main.temp);
+            document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+            document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+            document.querySelector("#firstweather").innerHTML = response.data.weather[0].main;
+
+        }
+
+
+        function defaultt(cityyy) {
+            let apiKey = "8944afa6845bd7c413a687258d3211ef";
+            let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityyy + "&appid=" + apiKey + "&units=metric";
+            axios.get(apiUrl).then(changeCityTemp);
+        }
+
+
+        function changeCity(event) {
+            event.preventDefault();
+            let cityyy = document.querySelector("#searchinput").value;
+            defaultt(cityyy);
+
+        }
+
+
+        function currentstatus1() {
+            navigator.geolocation.getCurrentPosition(currentstatus);
+        }
+
+        function currentstatus(position) {
+            let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+            axios.get(url).then(changeCityTemp);
+        }
+
+
+
+        let now = new Date();
+        let clock = document.querySelector("#clock");
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        clock.innerHTML = hours + ":" + minutes;
+
+
+
+        let searchbuttom = document.querySelector("#searchengine");
+        searchbuttom.addEventListener("click", changeCity);
+
+
+        let currentsearchbuttom = document.querySelector("#currentsearchengine");
+        currentsearchbuttom.addEventListener("click", currentstatus1);
+
+        defaultt("tehran");
+
+
+    </script>
+
+
+</body>
+
+</html>
