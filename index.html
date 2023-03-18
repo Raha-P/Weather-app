@@ -244,9 +244,8 @@ img {
                 clock.innerHTML = hours + ":" + minutes;
             }
 
-        let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "sunday"];
-        let currentday = days[(now.getDay() - 1)];
-        console.log(currentday);
+        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let currentday = days[now.getDay()];
         document.querySelector("#day").innerHTML = currentday;
 
 
