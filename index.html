@@ -15,7 +15,15 @@
 </head>
 <style>
 
+    #special {
+    background-image: url("https://wallpaperaccess.com/full/3056348.jpg");
+    background-color: #cccccc;
+    background-size: 100% ;
+   
+}
+
     .app {
+    
     background: linear-gradient(181.2deg, rgb(181, 239, 249) 10.5%, rgb(254, 254, 254) 86.8%);
     border: 1px solid cadetblue;
     border-radius: 10px;
@@ -46,8 +54,10 @@
         font-family: Tahoma;
     }
 
-    .day {
+    #day {
         color: rgb(95, 94, 94);
+    }
+    #clock {color: rgb(95, 94, 94);
     }
 
     .firstweather {
@@ -111,18 +121,19 @@ img {
     margin: 0 auto;
     
 }
+
 </style>
 
-<body>
+<body id="body">
     <div class="container">
     <div class="wrapper">
         <div class="app">
             <span class="searchBox">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-5">
                         <input type="text" class="form-control" placeholder="Enter the city" id="searchinput">
                     </div>
-                    <div class="col">
+                    <div class="col-7">
                         <button type="search" class="btn btn-primary" id="searchengine">Search</button>
                         <button type="button" class="btn btn-success" id="currentsearchengine">Current</button>
                     </div>
@@ -134,8 +145,8 @@ img {
             <span class="todayStatus">
                 <div class="row">
                     <div class="col">
-                        <span class="city" id="cityy"> </span> <br> <span class="day">Wednesday <span id="clock">
-                            </span></span>
+                        <span class="city" id="cityy"> </span> <br> <span id="day"> </span> <span id="clock"> </span>
+                            
                     </div>
             </span>
             <div class="col">
@@ -143,14 +154,13 @@ img {
                 <img src=" " alt="" id="icon">
             </div>
             <div class="col">
-                <span class="degree"> <span id="degreeNumber"> </span> <span id="celsius">°C | </span> <span id="faren">°F</span>
-                    <div class="details">Humidity: <span class="humidity" id="humidity"> </span>% <br> Wind: <span
-                            class="wind" id="wind"> </span> km/s </div>
+                <span class="degree"> <span id="degreeNumber"></span></span> <span id="celsius">°C</span>|<span id="faren">°F </span>
+                    <div class="details">Humidity: <span class="humidity" id="humidity"> </span>% <br> Wind: <span class="wind" id="wind"> </span> km/s </div>
             </div>
         </div>
 
         <br>
-        <em><span class="futureforcast">Future Forcast</span> </em>
+        <em><span class="futureforcast"> Future Forcast </span> </em>
         <hr>
         <span class="otherdays">
             <div class="row">
@@ -176,6 +186,7 @@ img {
 
         <div class="codeby"> <a href="https://github.com/Raha-P/Weather-app">open-source code</a> by Raha Pedram fard</div>
     </div>
+
     <script>
 
 
@@ -233,6 +244,11 @@ img {
                 clock.innerHTML = hours + ":" + minutes;
             }
 
+        let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "sunday"];
+        let currentday = days[(now.getDay() - 1)];
+        console.log(currentday);
+        document.querySelector("#day").innerHTML = currentday;
+
 
 
         let searchbuttom = document.querySelector("#searchengine");
@@ -244,6 +260,10 @@ img {
 
         defaultt("tehran");
 
+        ///if (response.data.weather[0].icon == "11n") {
+
+
+    
 
     </script>
 
