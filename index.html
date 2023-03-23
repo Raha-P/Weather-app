@@ -15,7 +15,14 @@
 </head>
 <style>
 
-    #special {
+#body {
+    background-image: url("https://images.unsplash.com/photo-1496450681664-3df85efbd29f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHdlYXRoZXJ8ZW58MHx8MHx8&w=1000&q=80");
+    background-size: 100%;
+}
+    
+
+
+    .special {
     background-image: url("https://wallpaperaccess.com/full/3056348.jpg");
     background-color: #cccccc;
     background-size: 100% ;
@@ -23,9 +30,7 @@
 }
 
     .app {
-    
-    background: linear-gradient(181.2deg, rgb(181, 239, 249) 10.5%, rgb(254, 254, 254) 86.8%);
-    border: 1px solid cadetblue;
+    border: 1px solid rgb(247, 241, 247);
     border-radius: 10px;
     }
 
@@ -55,14 +60,14 @@
     }
 
     #day {
-        color: rgb(95, 94, 94);
+        color: rgb(216, 213, 216);;
     }
-    #clock {color: rgb(95, 94, 94);
+    #clock {color: rgb(216, 213, 216);;
     }
 
     .firstweather {
         font-size: 35px;
-        color: rgb(49, 102, 248);
+        color: white;
         font-family: Tahoma;
     }
 
@@ -84,18 +89,18 @@
 
     .details {
         font-size: 16px;
-        color: rgb(95, 94, 94);
+        color: rgb(216, 213, 216);;
     }
 
     .futureforecast {
-        color: rgb(124, 184, 240);
+        color: rgb(216, 213, 216);
         font-size: 24px;
         padding: 370px;
     }
 
     .otherdays {
         font-size: 18px;
-        color: rgb(116, 115, 115);
+        color: rgb(216, 213, 216);
     }
 
     .emoji1,
@@ -106,16 +111,18 @@
         font-size: 30px;
     }
 
-    .btn-success {
+    .btn-outline-light {
         margin: 0px 10px;
     }
     .codeby {
     line-height: 0px;
     padding: 0 100px;
+    color: rgb(216, 213, 216);;
 }
 
 a {
     text-decoration: none;
+    color: rgb(82, 34, 194);
 }
 img {
     display: block;
@@ -143,7 +150,7 @@ img {
                     </div>
                     <div class="col-7">
                         <button type="search" class="btn btn-primary" id="searchengine">Search</button>
-                        <button type="button" class="btn btn-success" id="currentsearchengine">Current</button>
+                        <button type="button" class="btn btn-outline-light" id="currentsearchengine">Current</button>
                     </div>
                 </div>
             </span>
@@ -252,10 +259,10 @@ img {
                 clock.innerHTML = hours + ":" + minutes;
             }
 
+
         let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let currentday = days[now.getDay()];
         document.querySelector("#day").innerHTML = currentday;
-
 
 
         let searchbuttom = document.querySelector("#searchengine");
