@@ -22,15 +22,6 @@
     width: 100%;
     height: 100%;
 }
-    
-
-
-    .special {
-    background-image: url("https://wallpaperaccess.com/full/3056348.jpg");
-    background-color: #cccccc;
-    background-size: 100% ;
-   
-}
 
     .app {
     border: 1px solid rgb(247, 241, 247);
@@ -110,15 +101,9 @@
     .otherdays {
         font-size: 18px;
         color: rgb(216, 213, 216);
+        margin-bottom: 15px;
     }
 
-    .emoji1,
-    .emoji2,
-    .emoji3,
-    .emoji4,
-    .emoji5 {
-        font-size: 30px;
-    }
 
     .btn-outline-light {
         margin: 0px 10px;
@@ -145,8 +130,11 @@ img {
     font-size: 16px;
 }
 .forecast-temp-max {
-    color: black;
+    color: rgb(24, 2, 63);
 
+}
+.forecast-temp-min {
+    color: rgb(219, 160, 189) ;
 }
 
 </style>
@@ -193,13 +181,12 @@ img {
         </div>
         </div>
         <div class="codeby"> <a href="https://github.com/Raha-P/Weather-app">open-source code</a> by Raha Pedram fard</div>
-    
 
     <script>
 
-
         function changeCityTemp(response) {
             console.log(response);
+            
             document.querySelector("#cityy").innerHTML = response.data.name;
             document.querySelector("#degreeNumber").innerHTML = Math.round(response.data.main.temp);
             document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
@@ -207,29 +194,49 @@ img {
             document.querySelector("#firstweather").innerHTML = response.data.weather[0].main;
             document.querySelector("#icon").setAttribute("src", "http://openweathermap.org/img/wn/" +response.data.weather[0].icon+ "@2x.png");
 
+            getforecast(response.data.coord);
+        }
+
+        function getforecast(coordinates){
+            console.log(coordinates);
+            let apiKey = "0efb4fc16a9ed98dc0b3aafd8491d6ad";
+            let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+            console.log(apiUrl);
+            axios.get(apiUrl).then(displayforecastforotherdays);
+        }
+
+        function formatday(timestamp) {
+            let date = new Date (timestamp * 1000);
+            let day = date.getDay();
+            let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+            return days[day];
         }
         
-        function displayforecastforotherdays() {
+        function displayforecastforotherdays(response) {
+            let forecast = response.data.daily;
+
+            let forecastElement = document.querySelector("#otherdays");
+
             let forecastHTML = `<div class="row">`;
-            let days2 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-            days2.forEach(function(day) {forecastHTML = forecastHTML + `
+
+            forecast.forEach(function(forecastDay, index) {
+                if (index < 7 && index > 0) { 
+                forecastHTML = forecastHTML + `
                 <div class="col-2">
-                    <div class="forcast-date">${day}</div>
-                    <div class="emoji1">⛅️</div>
+                    <div class="forcast-date">${formatday(forecastDay.dt)}</div>
+                    <img
+                    src= "http://openweathermap.org/img/wn/" +forecast.weather[0].icon+ "@2x.png";
+                    alt=""
+                    width="42"/>
                     <div class="forecast-temps">
-                        <span class="forecast-temp-max">18°</span> <span class="forecast-temp-min">10°</span>
+                    <span class="forecast-temp-max">${Math.round(forecastDay.temp.max)}°</span> <span class="forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
                     </div>
-                </div>`;
+                </div>`;}
             })
             forecastElement.innerHTML = forecastHTML;   
         }
-        let forecastElement = document.querySelector("#otherdays");
-        displayforecastforotherdays();
-
-            
-
         
-
 
         function defaultt(cityyy) {
             let apiKey = "8944afa6845bd7c413a687258d3211ef";
@@ -242,7 +249,6 @@ img {
             event.preventDefault();
             let cityyy = document.querySelector("#searchinput").value;
             defaultt(cityyy);
-
         }
 
 
@@ -257,7 +263,6 @@ img {
             let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
             axios.get(url).then(changeCityTemp);
         }
-
 
 
         let now = new Date();
@@ -286,14 +291,8 @@ img {
 
         defaultt("tehran");
 
-        ///if (response.data.weather[0].icon == "11n") {
-
-
-
-    
 
     </script>
-
 
 </body>
 
