@@ -25,30 +25,31 @@
 
             return days[day];
         }
-        
+
+
         function displayforecastforotherdays(response) {
-            let forecast = response.data.daily;
-
-            let forecastElement = document.querySelector("#otherdays");
-
-            let forecastHTML = `<div class="row">`;
-
-            forecast.forEach(function(forecastDay, index) {
-                if (index < 7 && index > 0) { 
-                forecastHTML = forecastHTML + `
-                <div class="col-2">
-                    <div class="forcast-date">${formatday(forecastDay.dt)}</div>
-                    <img
-                    src= "http://openweathermap.org/img/wn/" +forecast.weather[0].icon+ "@2x.png";
-                    alt=""
-                    width="42"/>
-                    <div class="forecast-temps">
-                    <span class="forecast-temp-max">${Math.round(forecastDay.temp.max)}°</span> <span class="forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
-                    </div>
-                </div>`;}
-            })
-            forecastElement.innerHTML = forecastHTML;   
-        }
+             let forecast = response.data.daily;
+ 
+             let forecastElement = document.querySelector("#otherdays");
+ 
+             let forecastHTML = `<div class="row">`;
+ 
+             forecast.forEach(function(forecastDay, index) {
+                 if (index < 7 && index > 0) { 
+                 forecastHTML = forecastHTML + `
+                 <div class="col-2">
+                     <div class="forcast-date">${formatday(forecastDay.dt)}</div>
+                     <img
+                     src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png";
+                     alt=""
+                     width="42"/>
+                     <div class="forecast-temps">
+                     <span class="forecast-temp-max">${Math.round(forecastDay.temp.max)}°</span> <span class="forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
+                     </div>
+                 </div>`;}
+                })
+             forecastElement.innerHTML = forecastHTML;   
+            }
         
 
         function defaultt(cityyy) {
@@ -103,4 +104,4 @@
         currentsearchbuttom.addEventListener("click", currentstatus1);
 
         defaultt("tehran");
-
+        
