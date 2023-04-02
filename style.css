@@ -18,15 +18,11 @@
     padding: 20px;
 }
 
-.searchBox {
-    position: relative;
-    top: 25px;
-    left: 230px;
-    display: block;
-    width: 100%;
-    appearance: none;
-
+#search-form {
+    position: sticky;
+    padding: 18px 0px 0px 250px;
 }
+
 
 .todayStatus {
     text-align: center;
@@ -103,14 +99,12 @@
     position: static;
     text-align: left;
     padding: 0 100px;
-    ;
     color: rgb(216, 213, 216);
-    ;
 }
 
-a {
+.aa {
     text-decoration: none;
-    color: rgb(82, 34, 194);
+    color: rgb(128, 26, 153);
 }
 
 img {
@@ -124,10 +118,10 @@ img {
 }
 
 .forecast-temp-max {
-    color: rgb(24, 2, 63);
+    color: rgb(139, 12, 71);
 
 }
 
 .forecast-temp-min {
-    color: rgb(219, 160, 189);
+    color: rgb(44, 28, 119);
 }

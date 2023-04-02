@@ -99,6 +99,8 @@
         let searchbuttom = document.querySelector("#searchengine");
         searchbuttom.addEventListener("click", changeCity);
 
+        let form = document.querySelector("#search-form");
+        form.addEventListener("submit", changeCity);
 
         let currentsearchbuttom = document.querySelector("#currentsearchengine");
         currentsearchbuttom.addEventListener("click", currentstatus1);
