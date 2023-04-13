@@ -19,10 +19,11 @@
 }
 
 #search-form {
-    position: sticky;
-    padding: 18px 0px 0px 250px;
-}
+    padding-top: 10px;
+    padding-left: 10px;
 
+
+}
 
 .todayStatus {
     text-align: center;
@@ -90,19 +91,15 @@
 }
 
 
-.btn-outline-light {
-    margin: 0px 10px;
-}
 
 .codeby {
     line-height: 0px;
-    position: static;
-    text-align: left;
-    padding: 0 100px;
+    text-align: center;
+    ;
     color: rgb(216, 213, 216);
 }
 
-.aa {
+a {
     text-decoration: none;
     color: rgb(128, 26, 153);
 }
